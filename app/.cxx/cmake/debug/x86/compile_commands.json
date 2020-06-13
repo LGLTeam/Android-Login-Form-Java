@@ -1,0 +1,7 @@
+[
+{
+  "directory": "D:/Android-Login-Form-Java/app/.cxx/cmake/debug/x86",
+  "command": "D:\\Android\\ndk\\20.0.5594570\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=i686-none-linux-android17 --gcc-toolchain=D:/Android/ndk/20.0.5594570/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Android/ndk/20.0.5594570/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dyourlib_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\yourlib.dir\\native-lib.cpp.o -c D:\\Android-Login-Form-Java\\app\\src\\main\\cpp\\native-lib.cpp",
+  "file": "D:\\Android-Login-Form-Java\\app\\src\\main\\cpp\\native-lib.cpp"
+}
+]

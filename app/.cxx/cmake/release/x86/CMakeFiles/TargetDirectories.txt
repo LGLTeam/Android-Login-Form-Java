@@ -1,0 +1,3 @@
+D:/Android-Login-Form-Java/app/.cxx/cmake/release/x86/CMakeFiles/yourlib.dir
+D:/Android-Login-Form-Java/app/.cxx/cmake/release/x86/CMakeFiles/edit_cache.dir
+D:/Android-Login-Form-Java/app/.cxx/cmake/release/x86/CMakeFiles/rebuild_cache.dir

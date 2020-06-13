@@ -1,0 +1,53 @@
+{
+  "ndkFolder": "D:\\Android\\ndk\\20.0.5594570",
+  "messages": [
+    {
+      "level": "INFO",
+      "message": "android.ndkVersion from module build.gradle is not set"
+    },
+    {
+      "level": "INFO",
+      "message": "ndk.dir in local.properties is not set"
+    },
+    {
+      "level": "INFO",
+      "message": "ANDROID_NDK_HOME environment variable is not set"
+    },
+    {
+      "level": "INFO",
+      "message": "sdkFolder is D:\\Android"
+    },
+    {
+      "level": "INFO",
+      "message": "Because no explicit NDK was requested, the default version \u002720.0.5594570\u0027 for this Android Gradle Plugin will be used"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering D:\\Android\\ndk-bundle in SDK ndk-bundle folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering D:\\Android\\ndk\\20.0.5594570 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering D:\\Android\\ndk\\21.0.6113669 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering D:\\Android\\ndk\\21.2.6472646 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering D:\\Android\\ndk\\ndk14b in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering D:\\Android\\ndk\\ndk15c in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Found requested NDK version 20.0.5594570 at D:\\Android\\ndk\\20.0.5594570"
+    }
+  ]
+}

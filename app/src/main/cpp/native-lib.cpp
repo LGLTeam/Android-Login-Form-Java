@@ -14,7 +14,7 @@ Java_com_example_androidloginjava_LoginForm_Check(JNIEnv *env, jclass clazz, jst
     // This is just an example
     // You should not check username and password locally as it can be easly crackable
     // This implementation is for peoples who have programming skills in Java, C++ and php and can protect/encrypt the lib
-    if (strcmp(userStr, "myusername") == 0 && strcmp(passStr, "mypassword") == 0) {
+    if (strcmp(userStr, "abc") == 0 && strcmp(passStr, "123") == 0) {
         featuresEnabled = true;
         return true;
     }
