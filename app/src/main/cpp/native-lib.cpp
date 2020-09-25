@@ -1,22 +1,35 @@
+#include <sys/types.h>
+#include <pthread.h>
 #include <jni.h>
-#include <string>
+#include <unistd.h>
+#include "Logger.h"
 
-bool featuresEnabled = false;
+bool loggedin = false;
 
-extern "C" JNIEXPORT jboolean JNICALL
-Java_com_example_androidloginjava_LoginForm_Check(JNIEnv *env, jclass clazz, jstring user,
-                                                  jstring pass) {
-    const char *userStr = env->GetStringUTFChars(user, 0);
-    const char *passStr = env->GetStringUTFChars(pass, 0);
-
-    // Here you can implement server checks
-
-    // This is just an example
-    // You should not check username and password locally as it can be easly crackable
-    // This implementation is for peoples who have programming skills in Java, C++ and php and can protect/encrypt the lib
-    if (strcmp(userStr, "abc") == 0 && strcmp(passStr, "123") == 0) {
-        featuresEnabled = true;
-        return true;
-    }
-    return false;
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_androidloginjava_LoginForm_Check(JNIEnv *env, jclass clazz) {
+    loggedin = true;
 }
+
+//Simple security check
+void *new_thread(void *) {
+    //Loops until logged in
+    do {
+        sleep(1);
+    } while (!loggedin);
+
+    //Successfully logged in and load your stuff here
+
+    LOGD("Logged in!");
+
+    return NULL;
+}
+
+__attribute__((constructor))
+void lib_main() {
+    // Create a new thread so it does not block the main thread, means the app would not freeze
+    pthread_t ptid;
+    pthread_create(&ptid, NULL, new_thread, NULL);
+}
+

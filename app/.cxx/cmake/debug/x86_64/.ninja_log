@@ -1,6 +1,0 @@
-# ninja log v5
-0	10	0	clean	5f59e5fc09154c35
-0	11	0	clean	5f59e5fc09154c35
-20	1303	613722839	CMakeFiles/yourlib.dir/native-lib.cpp.o	65b97b5553acb719
-1306	2058	613722839	D:/Android-Login-Form-Java/app/build/intermediates/cmake/debug/obj/x86_64/libyourlib.so	38da8efdfd1ff5ef
-0	13	0	clean	5f59e5fc09154c35
