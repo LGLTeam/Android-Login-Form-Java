@@ -1,5 +1,5 @@
 # Android Login Form in Java
-Simple login form in Java only. It will call native method for login check
+Simple login form in Java only with okhttp dependency
 
 This project is for experienced modders and programmers only and must be able to search on Google for help. We will not explain here
 
@@ -9,9 +9,15 @@ Keep in mind that it is mainly for APK modding and not for general app developme
 
 # PHP
 
-Add `login.php` to your server that supports PHP. Repo based hosting such as Github does not support PHP
+Add `login.php` to your server that supports PHP, use 000webhost.com for free webserver. Repo based hosting such as Github does not support PHP
 
-Change URL on `public static String URL` on `LoginForm.java` file
+Change URL on `public static String URL` on `MainActivity.java` file
+
+# Merging into your project
+
+It's easy, just copy and paste the code of `public static void Start(final Context context)` into your project and make some changes
+
+See the example folder how the login code was merged into the mod menu project on `MainActivity.java` file
 
 # How to implement to APK:
 
@@ -30,6 +36,8 @@ Click on **locate** to show you the location of **build.apk**. It is stored at `
 Now decompile your **app-debug.apk**.
 
 Copy all your smali folders to the game's smali folder to the game's decompiled directory `(game name)\smali`. If the game have multidexes, add your smali to the last classes dex if possible to prevent compilation errors such as `Unsigned short value out of range: xxxxx`
+
+If the game has already okhttp smalis, don't add it.
 
 Now, you must know the game's launch activity/main activity
 
@@ -55,7 +63,7 @@ If the game have multi dexes, it may be located in smali_classes2... please chec
 
 Open the main acitivity's smali file, search for OnCreate method and paste this code inside (change the package name if you had changed it)
 ```
-invoke-static {p0}, Lcom/example/androidloginjava/LoginForm;->Start(Landroid/content/Context;)V
+invoke-static {p0}, Lcom/example/androidloginjava/MainActivity;->Start(Landroid/content/Context;)V
 ```
 
 ![](https://i.imgur.com/yjsAaHD.png)
