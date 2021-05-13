@@ -1,11 +1,11 @@
 # Android Login Form in Java
 Simple login form in Java only with okhttp dependency
 
-This project is for experienced modders and programmers only and must be able to search on Google for help. We will not explain here
-
 Keep in mind that it is mainly for APK modding and not for general app development purposes
 
 ![](https://i.imgur.com/K7z1R6J.png)
+
+**Note: This project is for experienced modders and programmers only and you must be able to do yourself and be able to search for help. This project will not be maintained much, we will NOT offer help and support with this project, and the Example will not be updated.**
 
 # PHP
 
