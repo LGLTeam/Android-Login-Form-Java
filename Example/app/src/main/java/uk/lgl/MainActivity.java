@@ -15,6 +15,7 @@ import android.os.Process;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,18 +26,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import uk.lgl.modmenu.FloatingModMenuService;
+import javax.net.ssl.HttpsURLConnection;
+
+/*import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;*/
 
 public class MainActivity extends Activity {
 
@@ -57,6 +62,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         //To launch mod menu.
         Start(this);
@@ -239,7 +245,8 @@ public class MainActivity extends Activity {
                         edit.apply();
 
                         try {
-                            String[] result = this.login(user, pass);
+                            // String[] result = this.login(user, pass);
+                            String[] result = urlRequest(MainActivity.URL, "user=" + user + "&pass=" + pass);
                             String status = result[0];
                             String hashS = result[1];
                             String MsgS = result[2];
@@ -248,10 +255,7 @@ public class MainActivity extends Activity {
                             if (status.equals("1") && hashS.equals(hashL)) {
                                 alertDialog.dismiss();
                                 // Check();
-                                context.startService(new Intent(context, FloatingModMenuService.class));
-
-                                //Use getApplicationContext() so toast doesn't show some weird black color text background
-                                Toast.makeText(context.getApplicationContext(), MsgS, Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, MsgS, Toast.LENGTH_LONG).show();
                             } else {
                                 textStatus.setTextColor(Color.rgb(255, 255, 0));
                                 textStatus.setText(MsgS);
@@ -262,23 +266,60 @@ public class MainActivity extends Activity {
                         }
                     }
 
-                    public String[] login(String user, String pass) throws IOException {
-                        OkHttpClient client = new OkHttpClient();
-                        RequestBody formBody = new FormBody.Builder()
-                                .add("user", user)
-                                .add("pass", pass)
-                                .build();
+                    //Requires okhttp dependency
+                /*public String[] login(String user, String pass) throws IOException {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody formBody = new FormBody.Builder()
+                            .add("user", user)
+                            .add("pass", pass)
+                            .build();
 
-                        //URL to request
-                        Request request = new Request.Builder()
-                                .url(URL)
-                                .post(formBody)
-                                .build();
+                    //URL to request
+                    Request request = new Request.Builder()
+                            .url(URL)
+                            .post(formBody)
+                            .build();
 
-                        Response response = client.newCall(request).execute();
-                        String res = response.body().string();
+                    Response response = client.newCall(request).execute();
+                    String res = response.body().string();
+                    Log.d("loginn ", res);
+                    return res.split("\\|");
+                }*/
 
-                        return res.split("\\|");
+                    public String[] urlRequest(String str, String param) throws IOException {
+                        URL url = new URL(str);
+                        HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                        urlConnection.setDoOutput(true);
+                        urlConnection.setRequestMethod("POST");
+                        urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+                        // write out form parameters
+                        String postParameters = param;
+                        urlConnection.setFixedLengthStreamingMode(postParameters.getBytes().length);
+                        PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
+                        out.print(postParameters);
+                        out.close();
+
+                        // connect
+                        urlConnection.connect();
+
+                        StringBuilder sb = new StringBuilder();
+                        try {
+                            //  BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new URL(str).openConnection().getInputStream()));
+                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                            while (true) {
+                                String readLine = bufferedReader.readLine();
+                                if (readLine == null) {
+                                    break;
+                                }
+                                sb.append(readLine);
+                                sb.append("\n");
+                            }
+                            bufferedReader.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return sb.toString().split("\\|");
                     }
 
                     public String MD5_Hash(String s) {
